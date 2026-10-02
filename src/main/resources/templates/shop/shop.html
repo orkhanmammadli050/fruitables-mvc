@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{layout}" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">Title</title>
+</head>
+<body>
+
+
+<main layout:fragment="content">
+
+    <div class="container-fluid bg-light py-3 mb-2">
+        <div class="container">
+            <nav>
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item">
+                        <a th:href="@{/}" class="text-decoration-none text-muted">
+                            <i class="fa fa-home me-1"></i>Əsas səhifə
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item active text-primary fw-bold" aria-current="page">Mağaza</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Modal Search Start -->
+    <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen">
+            <div class="modal-content rounded-0">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="searchModalLabel">Açar sözlərlə axtar</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body d-flex align-items-center">
+                    <form action="/shop" method="get" class="input-group w-75 mx-auto d-flex">
+                        <input type="search" name="keyword" th:value="${selectedKeyword}" class="form-control p-3" placeholder="Açar sözlər" aria-describedby="modal-search-icon">
+                        <button type="submit" id="modal-search-icon" class="input-group-text p-3"><i class="fa fa-search"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Search End -->
+
+    <!-- Fruits Shop Start-->
+    <div class="container-fluid fruite py-5">
+        <div class="container py-5">
+            <h1 class="mb-4">Təzə Meyvə və Tərəvəzlər</h1>
+
+            <form action="/shop" method="get">
+                <div class="row g-4">
+                    <div class="col-lg-12">
+                        <!-- Search Input Box -->
+                        <div class="row g-4 mb-4">
+                            <div class="col-xl-4">
+                                <div class="input-group w-100 mx-auto d-flex">
+                                    <input type="search" name="keyword" th:value="${selectedKeyword}" class="form-control p-3" placeholder="Açar sözlər" aria-describedby="page-search-icon">
+                                    <button type="submit" id="page-search-icon" class="input-group-text p-3"><i class="fa fa-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row g-4">
+                            <!-- Left Sidebar -->
+                            <div class="col-lg-3">
+                                <div class="row g-4">
+                                    <!-- Categories Section -->
+                                    <div class="col-lg-12">
+                                        <div class="mb-3">
+                                            <h4>Kateqoriyalar</h4>
+                                            <ul class="list-unstyled fruite-categorie">
+                                                <li>
+                                                    <div class="d-flex justify-content-between fruite-name">
+                                                        <a href="/shop" th:classappend="${selectedCategoryId == null} ? 'fw-bold text-primary' : ''">
+                                                            <i class="fas fa-apple-alt me-2"></i>Bütün məhsullar
+                                                        </a>
+                                                    </div>
+                                                </li>
+                                                <li th:each="category, stat : ${categories}" th:if="${stat.index < 10}">
+                                                    <div class="d-flex justify-content-between fruite-name">
+                                                        <a th:href="@{/shop(categoryId=${category.id}, keyword=${selectedKeyword}, minPrice=${selectedMinPrice}, maxPrice=${selectedMaxPrice})}"
+                                                           th:text="${category.name}"
+                                                           th:classappend="${selectedCategoryId == category.id} ? 'fw-bold text-primary' : ''">
+                                                            <i class="fas fa-apple-alt me-2"></i>Apples
+                                                        </a>
+                                                        <span th:text="'(' + ${#lists.size(category?.products?:{})} + ')'">(0)</span>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <!-- Price Filter Section -->
+                                    <div class="col-lg-12">
+                                        <div class="mb-3">
+                                            <h4 class="mb-2">Qiymət Filtri</h4>
+                                            <input type="hidden" name="categoryId" th:value="${selectedCategoryId}" />
+
+                                            <div class="d-flex align-items-center gap-2 mb-3">
+                                                <input type="number" name="minPrice" class="form-control" placeholder="Min "
+                                                       min="0" th:value="${selectedMinPrice}" />
+                                                <span>-</span>
+                                                <input type="number" name="maxPrice" class="form-control" placeholder="Maks "
+                                                       min="0" th:value="${selectedMaxPrice}" />
+                                            </div>
+
+                                            <button type="submit" class="btn border border-secondary text-primary rounded-pill w-100">
+                                                <i class="fas fa-filter me-2"></i>Qiymət
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <!-- Products List Section -->
+                            <div class="col-lg-9">
+                                <div class="row g-4 justify-content-center">
+
+
+                                    <div th:each="product : ${products}" class="col-md-6 col-lg-6 col-xl-4">
+                                        <div class="rounded position-relative fruite-item">
+                                            <div class="fruite-img">
+                                                <img th:src="${product.photos != null and !product.photos.isEmpty()} ? ${product.photos[0].url} : '/img/fruite-item-5.jpg'"
+                                                     class="img-fluid w-100 rounded-top" alt="" style="height: 200px; object-fit: cover;">
+                                            </div>
+
+                                            <div th:text="${product.category.name}" class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">
+                                                Category
+                                            </div>
+
+                                            <div class="p-4 border border-secondary border-top-0 rounded-bottom">
+                                                <h4>
+                                                    <a th:href="@{'/' + ${product.category.slug} + '/' + ${product.slug}}" th:text="${product.name}" class="text-dark">Product Name</a>
+                                                </h4>
+                                                <p th:text="${product.shortDescription}">Product short description...</p>
+
+                                                <div class="d-flex justify-content-between flex-lg-wrap">
+                                                    <p class="text-dark fs-5 fw-bold mb-0" th:text=" ${product.price} + ' ₼ / kq'">$4.99 / kg</p>
+                                                    <input type="hidden" name="productId" th:value="${product.id}">
+                                                    <input type="hidden" name="quantity" value="1">
+                                                    <button type="submit" formaction="/addToCart" formmethod="post" class="btn border border-secondary rounded-pill px-3 text-primary">
+                                                        <i class="fa fa-shopping-bag me-2 text-primary"></i> Səbətə at
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div th:if="${#lists.isEmpty(products)}" class="col-12 text-center py-5">
+                                        <h3>Məhsul tapılmadı!</h3>
+                                    </div>
+
+                                    <!-- Dynamic Pagination Section -->
+                                    <div th:if="${totalPages > 1}" class="col-12">
+                                        <div class="pagination d-flex justify-content-center mt-5">
+
+                                            <a th:href="@{/shop(page=${currentPage - 1}, categoryId=${selectedCategoryId}, keyword=${selectedKeyword}, minPrice=${selectedMinPrice}, maxPrice=${selectedMaxPrice})}"
+                                               th:classappend="${currentPage == 0} ? 'disabled' : ''" class="rounded">&laquo;</a>
+
+                                            <a th:each="i : ${#numbers.sequence(0, totalPages - 1)}"
+                                               th:href="@{/shop(page=${i}, categoryId=${selectedCategoryId}, keyword=${selectedKeyword}, minPrice=${selectedMinPrice}, maxPrice=${selectedMaxPrice})}"
+                                               th:text="${i + 1}"
+                                               th:classappend="${i == currentPage} ? 'active rounded' : 'rounded'">1</a>
+
+                                            <a th:href="@{/shop(page=${currentPage + 1}, categoryId=${selectedCategoryId}, keyword=${selectedKeyword}, minPrice=${selectedMinPrice}, maxPrice=${selectedMaxPrice})}"
+                                               th:classappend="${currentPage == totalPages - 1} ? 'disabled' : ''" class="rounded">&raquo;</a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+    <!-- Fruits Shop End-->
+</main>
+
+</body>
+</html>

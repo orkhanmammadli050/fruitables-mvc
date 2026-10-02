@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">Your Ultimate Game Marketplace</title>
+
+</head>
+<body layout:fragment ="content">
+
+<!-- Login Form -->
+<section class="section" style="margin-top: 150px; margin-bottom: 50px;">
+    <div class="container" style="max-width: 500px;">
+        <div class="card">
+            <h2 style="text-align: center; margin-bottom: 2rem;">Hesaba daxil ol</h2>
+
+            <form method="post" action="/login">
+                <div class="form-group">
+                    <label class="form-label" for="email">E-mail və ya istifadəçi adı</label>
+                    <input type="text" id="email" name="username" class="form-input" placeholder="E-mail və ya istifadəçi adınızı daxil edin"
+                           oninvalid="this.setCustomValidity('Zəhmət olmasa bu xananı doldurun')"
+                           oninput="this.setCustomValidity('')" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="password">Şifrə</label>
+                    <input type="password" id="password" name="password" class="form-input" placeholder="Şifrənizi daxil edin"
+                           oninvalid="this.setCustomValidity('Zəhmət olmasa bu xananı doldurun')"
+                           oninput="this.setCustomValidity('')" required>
+                </div>
+
+                <div class="form-group">
+                    <div class="flex-between">
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="remember" class="checkbox-input">
+                            <label for="remember" class="form-label" style="margin: 0;">Məni yadda saxla</label>
+                        </div>
+                        <a href="#" style="font-size: 0.9rem;">Şifrəni unutmusunuz?</a>
+                    </div>
+                </div>
+
+
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">
+                    Daxil ol
+                </button>
+            </form>
+
+            <div style="text-align: center; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+                <p class="text-muted">Hesabınız yoxdur?</p>
+                <a href="/register" class="btn btn-outline" style="width: 100%; margin-top: 1rem;">
+                    Hesab yarat
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

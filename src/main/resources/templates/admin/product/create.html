@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{admin/layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">
+        Product Create
+    </title>
+
+
+</head>
+
+<body>
+
+<main layout:fragment="content">
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+
+                <div class="card shadow rounded-4">
+                    <div class="card-body p-4">
+
+                        <h3 class="text-center mb-4">
+                            Məhsul əlavə et
+                        </h3>
+
+                        <form method="post">
+
+                            <div class="mb-3">
+                                <label class="form-label"> Məhsulun adı </label>
+                                <input type="text" class="form-control" name="name" placeholder="Məhsulun adını daxil edin">
+                            </div>
+
+
+                            <div class="mb-3">
+                                <label class="form-label"> Məhsulun qiyməti </label>
+                                <input type="number" class="form-control" name="price" placeholder="Məhsulun qiymətini daxil edin">
+                            </div>
+
+
+                            <div class="mb-3">
+                                <label class="form-label"> Məhsulun endirimi</label>
+                                <input type="number" class="form-control" name="discount" placeholder="Məhsulun endirimini daxil edin">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label"> Məhsulun təsviri </label>
+                                <textarea class="form-control" name="description" ></textarea>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label"> Məhsulun qısa təsviri</label>
+                                <textarea class="form-control" name="shortDescription" ></textarea>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label"> Məhsulun miqdarı</label>
+                                <input type="number" class="form-control" name="quantity" placeholder="Məhsulun miqdarını daxil edin">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label"> Məhsulun keşbek faizi</label>
+                                <input type="number" class="form-control" name="cashbackPercent" placeholder="Məhsulun keşbek faizini daxil edin">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label"> Məhsulun kateqoriyası</label>
+                                <select class="form-control" name="categoryId">
+                                    <option th:each="category : ${categories}"  th:text="${category.name}"  th:value="${category.id}">Meyveler</option>
+                                </select>
+                            </div>
+
+
+                            <div class="d-grid">
+                                <button type="submit"
+                                        class="btn btn-primary">
+                                    Məhsulu yadda saxla
+                                </button>
+                            </div>
+
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</main>
+
+
+</body>
+</html>

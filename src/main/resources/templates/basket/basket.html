@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{layout}" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+
+    <title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">Title</title>
+</head>
+<body>
+
+
+<main layout:fragment="content">
+
+    <div class="container-fluid bg-light py-3 mb-2">
+        <div class="container">
+            <nav>
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item">
+                        <a th:href="@{/}" class="text-decoration-none text-muted">
+                            <i class="fa fa-home me-1"></i>Əsas səhifə
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item active text-primary fw-bold" aria-current="page">Səbət</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Cart Page Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="table-responsive" th:if="${baskets != null and !baskets.isEmpty()}">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Məhsullar</th>
+                        <th scope="col">Ad</th>
+                        <th scope="col">Qiymət</th>
+                        <th scope="col">Miqdar</th>
+                        <th scope="col">Cəm</th>
+                        <th scope="col">Ləğv et</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="basket : ${baskets}" th:data-basket-id="${basket.id}">
+                        <th scope="row">
+                            <div class="d-flex align-items-center">
+                                <img th:src="@{${basket.product.photoUrl}}" class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;" alt="">
+                            </div>
+                        </th>
+                        <td>
+                            <p th:text="${basket.product.name}" class="mb-0 mt-4">Big Banana</p>
+                        </td>
+                        <td>
+                            <p th:text="${basket.product.price}" class="mb-0 mt-4">2.99 $</p>
+                        </td>
+                        <td>
+                            <div class="input-group quantity mt-4" style="width: 120px;">
+                                <div class="input-group-btn">
+                                    <button type="button"
+                                            class="btn btn-sm btn-minus rounded-circle bg-light border"
+                                            th:data-id="${basket.product.id}"
+                                            th:data-price="${basket.product.price}">
+                                        <i class="fa fa-minus"></i>
+                                    </button>
+                                </div>
+                                <input type="number"
+                                       class="form-control form-control-sm text-center border-0 item-quantity quantity-input"
+                                       th:value="${basket.quantity}" min="1"
+                                       oninput="if(this.value < 1) this.value = 1;">
+                                <div class="input-group-btn">
+                                    <button type="button"
+                                            class="btn btn-sm btn-plus rounded-circle bg-light border"
+                                            th:data-id="${basket.product.id}"
+                                            th:data-price="${basket.product.price}">
+                                        <i class="fa fa-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <p th:text="${basket.totalPrice}" class="mb-0 mt-4 item-total">2.99 $</p>
+                        </td>
+                        <td>
+
+                            <button type="button"
+                                    class="btn btn-md rounded-circle bg-light border mt-4 btn-delete"
+                                    th:data-id="${basket.product.id}">
+                                <i class="fa fa-times text-danger"></i>
+                            </button>
+                        </td>
+
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+            <div th:if="${baskets == null or baskets.isEmpty()}" class="text-center py-5">
+                <i class="fa fa-shopping-bag text-secondary mb-3" style="font-size: 60px;"></i>
+                <h3 class="mb-3">Səbətində məhsul yoxdur</h3>
+                <p class="text-muted mb-4">İstədiyin məhsulu səbətinə əlavə et.</p>
+                <a href="/" class="btn btn-primary rounded-pill px-4 py-2">Əsas səhifə</a>
+            </div>
+
+            <div th:if="${errorMessage}" class="alert alert-danger text-center" role="alert" th:text="${errorMessage}">
+            </div>
+
+            <div th:if="${successMessage}" class="alert alert-success text-center" role="alert" th:text="${successMessage}">
+            </div>
+            <form th:action="@{/apply-coupon}" method="post">
+                <div class="input-group mw-100 mb-3">
+                    <input type="text" name="code" class="form-control p-4" placeholder="Kupon kodu" required>
+                    <button class="btn btn-primary border-0 px-4" type="submit">Kuponu tətbiq et</button>
+                </div>
+            </form>
+            <div class="row g-4 justify-content-end">
+                <div class="col-8"></div>
+                <div class="col-sm-8 col-md-7 col-lg-6 col-xl-4">
+                    <div class="bg-light rounded">
+                        <div class="p-4">
+                            <h1 class="display-6 mb-4">Yekun <span class="fw-normal">Məbləğ</span></h1>
+
+                            <div class="d-flex justify-content-between mb-4">
+                                <h5 class="mb-0 me-4">Aralıq cəm:</h5>
+                                <p class="mb-0" id="cart-subtotal" th:text="${subtotal} + ' ₼'">$96.00</p>
+                            </div>
+
+                            <div th:if="${session.discountPercent != null}" class="d-flex justify-content-between mb-4">
+                                <h5 class="mb-0 me-4 text-success">Endirim (<span th:text="${session.discountPercent}"></span>%):</h5>
+                                <p class="mb-0 text-success" th:text="'- ' + ${discountedAmount} + ' ₼'">-0.00 ₼</p>
+                            </div>
+
+                        </div>
+
+                        <div class="py-4 mb-4 border-top border-bottom d-flex justify-content-between">
+                            <h5 class="mb-0 ps-4 me-4">Yekun cəm:</h5>
+                            <p class="mb-0 pe-4" id="cart-total" th:text="${total} + ' ₼'">$99.00</p>
+                        </div>
+
+                        <a href="/checkout" class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4" type="button">Sifarişi rəsmiləşdir</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Cart Page End -->
+</main>
+
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{admin/layout}" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">Title</title>
+</head>
+<body>
+
+
+<main layout:fragment="content">
+
+    <a href="/dashboard/product/create">Məhsul əlavə et</a>
+
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Ad</th>
+            <th scope="col">Qiymət</th>
+            <th scope="col">Endirim</th>
+            <th scope="col">Miqdar</th>
+            <th scope="col">Keşbek faizi</th>
+            <th scope="col">Kateqoriya</th>
+            <th scope="col">Əməliyyatlar</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="product, i : ${products}">
+            <th th:text="${i.count}" scope="row">1</th>
+            <td th:text="${product.name}">Mark</td>
+            <td th:text="${product.price}">Mark</td>
+            <td th:text="${product.discount}">Mark</td>
+            <td th:text="${product.quantity}">Mark</td>
+            <td th:text="${product.cashbackPercent}">Mark</td>
+            <td th:text="${product.category.name}">Mark</td>
+            <td>
+                <a th:href="'/dashboard/product/update/' + ${product.id}">Redaktə et</a>
+                <a th:href="@{'/dashboard/product/delete/' + ${product.id}}" class="btn btn-danger btn-sm">Sil</a>
+            </td>
+
+        </tr>
+
+        </tbody>
+    </table>
+</main>
+
+</body>
+</html>

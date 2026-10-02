@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirm Your ITBrains Account</title>
+    <style>
+        /* Reset styles for email client consistency */
+        body, p, h1, h2, h3, h4, table, td {
+          margin: 0;
+          padding: 0;
+          font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+        body {
+          background-color: #0b0f19;
+          color: #f1f5f9;
+          -webkit-font-smoothing: antialiased;
+          width: 100% !important;
+          height: 100% !important;
+        }
+        table {
+          border-collapse: collapse;
+          mso-table-lspace: 0pt;
+          mso-table-rspace: 0pt;
+        }
+        img {
+          border: 0;
+          height: auto;
+          line-height: 100%;
+          outline: none;
+          text-decoration: none;
+        }
+
+        /* Responsive overrides for mobile screens */
+        @media screen and (max-width: 600px) {
+          .email-container {
+            width: 100% !important;
+            padding: 12px !important;
+          }
+          .content-card {
+            padding: 28px 20px !important;
+            border-radius: 16px !important;
+          }
+          .cta-btn {
+            width: 100% !important;
+            text-align: center !important;
+            padding: 16px 20px !important;
+            box-sizing: border-box !important;
+          }
+        }
+    </style>
+</head>
+<body style="background-color: #0b0f19; margin: 0; padding: 40px 0;">
+
+<!-- Hidden Preheader Snippet -->
+<div style="display: none; max-height: 0px; overflow: hidden; font-size: 1px; line-height: 1px; color: #fff; opacity: 0;">
+    Please confirm your email address to complete your ITBrains account setup.
+</div>
+
+<!-- Outer Wrapper Table -->
+<table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color: #0b0f19;">
+    <tr>
+        <td align="center">
+
+            <!-- Main Email Container -->
+            <table class="email-container" width="560" border="0" cellspacing="0" cellpadding="0" style="width: 560px; max-width: 560px; margin: 0 auto;">
+
+                <!-- Top Accent Beam Gradient -->
+                <tr>
+                    <td align="center" style="padding-bottom: 24px;">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td height="4" style="background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 50%, #06b6d4 100%); border-radius: 4px;"></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+                <!-- Header Logo / Brand -->
+                <tr>
+                    <td align="center" style="padding-bottom: 28px;">
+                        <table border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td valign="middle" style="padding-right: 12px;">
+                                    <div style="width: 40px; height: 40px; background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); border-radius: 10px; text-align: center; line-height: 40px; box-shadow: 0 0 20px rgba(37, 99, 235, 0.45);">
+                                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle;">
+                                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                                            <line x1="8" y1="21" x2="16" y2="21"></line>
+                                            <line x1="12" y1="17" x2="12" y2="21"></line>
+                                        </svg>
+                                    </div>
+                                </td>
+                                <td valign="middle">
+                    <span style="font-size: 22px; font-weight: 800; color: #ffffff; letter-spacing: -0.5px;">
+                      ITBrains <span style="color: #38bdf8; font-weight: 600;">Ecommerce</span>
+                    </span>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+                <!-- Main Content Card -->
+                <tr>
+                    <td>
+                        <table class="content-card" width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color: #131924; border: 1px solid #222d3d; border-radius: 20px; padding: 44px; box-shadow: 0 20px 40px rgba(0,0,0,0.5);">
+
+                            <!-- Status Pill -->
+                            <tr>
+                                <td align="center" style="padding-bottom: 20px;">
+                                    <div style="display: inline-block; background: rgba(59, 130, 246, 0.12); border: 1px solid rgba(59, 130, 246, 0.3); padding: 6px 16px; border-radius: 30px;">
+                      <span style="font-size: 12px; font-weight: 600; color: #60a5fa; text-transform: uppercase; letter-spacing: 0.8px;">
+                        Account Email Verification
+                      </span>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- Heading & Explanation -->
+                            <tr>
+                                <td align="center" style="padding-bottom: 28px;">
+                                    <h1 th:text="${firstName} + ' ' + ${lastName} + ' confirm your email address' " style="font-size: 26px; font-weight: 800; color: #ffffff; margin-bottom: 12px; letter-spacing: -0.5px; line-height: 1.3;">
+
+                                    </h1>
+                                    <p style="font-size: 15px; color: #94a3b8; line-height: 1.6; max-width: 440px; margin: 0 auto;">
+                                        Thanks for getting started with ITBrains Ecommerce! Please verify that <strong style="color: #f1f5f9;">alex.morgan@example.com</strong> is your email address by clicking the button below.
+                                    </p>
+                                </td>
+                            </tr>
+
+                            <!-- Primary CTA Button -->
+                            <tr>
+                                <td align="center" style="padding-bottom: 32px;">
+                                    <table border="0" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td align="center" style="border-radius: 12px; background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); box-shadow: 0 8px 24px rgba(37, 99, 235, 0.35);">
+                                                <a th:href=" 'http://localhost:8080/verify?token=' + ${token}" class="cta-btn" target="_blank" style="display: inline-block; padding: 16px 40px; font-size: 15px; font-weight: 700; color: #ffffff; text-decoration: none; border-radius: 12px; letter-spacing: 0.3px;">
+                                                    Verify Email Address →
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+
+                            <!-- Divider Line -->
+                            <tr>
+                                <td style="border-top: 1px solid #1e293b; padding-bottom: 28px;"></td>
+                            </tr>
+
+                            <!-- Account Summary Section -->
+                            <tr>
+                                <td style="padding-bottom: 28px;">
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color: #0f141f; border: 1px solid #1e293b; border-radius: 12px; padding: 18px 20px;">
+                                        <tr>
+                                            <td style="font-size: 13px; color: #64748b; padding-bottom: 8px;">Account Email:</td>
+                                            <td align="right" style="font-size: 13px; font-weight: 600; color: #f1f5f9; padding-bottom: 8px;">alex.morgan@example.com</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-size: 13px; color: #64748b; padding-bottom: 8px;">Verification Status:</td>
+                                            <td align="right" style="font-size: 13px; font-weight: 600; color: #fbbf24; padding-bottom: 8px;">
+                          <span style="background: rgba(245, 158, 11, 0.12); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.25); padding: 2px 8px; border-radius: 12px; font-size: 11px;">
+                            Pending Verification
+                          </span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-size: 13px; color: #64748b;">Registration Date:</td>
+                                            <td align="right" style="font-size: 13px; font-weight: 500; color: #cbd5e1;">July 28, 2026</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+
+                            <!-- Alternate URL Link -->
+                            <tr>
+                                <td style="border-top: 1px solid #1e293b; padding-top: 20px;">
+                                    <p style="font-size: 12px; color: #64748b; line-height: 1.5; margin-bottom: 6px;">
+                                        Button not working? Copy and paste this link into your browser:
+                                    </p>
+                                    <p style="font-size: 12px; word-break: break-all;">
+                                        <a href="https://itbrainsecommerce.com/confirm?token=e9f8a3b1c2d3e4f5" style="color: #38bdf8; text-decoration: underline;">https://itbrainsecommerce.com/confirm?token=e9f8a3b1c2d3e4f5</a>
+                                    </p>
+                                </td>
+                            </tr>
+
+                        </table>
+                    </td>
+                </tr>
+
+                <!-- Security Disclaimer -->
+                <tr>
+                    <td align="center" style="padding: 24px 12px 12px 12px;">
+                        <p style="font-size: 12px; color: #475569; line-height: 1.5; max-width: 460px;">
+                            If you did not register an account with ITBrains Ecommerce, no further action is required and you can safely ignore this email.
+                        </p>
+                    </td>
+                </tr>
+
+                <!-- Footer Section -->
+                <tr>
+                    <td align="center" style="padding-bottom: 40px;">
+                        <p style="font-size: 12px; color: #475569; margin-bottom: 8px;">
+                            © 2026 ITBrains Ecommerce Technologies Inc. All rights reserved.
+                        </p>
+                        <p style="font-size: 12px; color: #475569;">
+                            <a href="#" style="color: #64748b; text-decoration: underline;">Privacy Policy</a> · <a href="#" style="color: #64748b; text-decoration: underline;">Terms of Service</a> · <a href="#" style="color: #64748b; text-decoration: underline;">Help Center</a>
+                        </p>
+                    </td>
+                </tr>
+
+            </table>
+
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>
